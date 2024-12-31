@@ -1,0 +1,537 @@
+<html><head><base href="/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boîte à idées - Bureau des élèves</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-blue: #2196f3;
+    --light-blue: #e3f2fd;
+    --dark-blue: #1565c0; 
+    --gradient: linear-gradient(135deg, #2196f3, #1565c0);
+}
+
+body {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: var(--gradient);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+.logo-text {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+.context-section, .idea-form, .submitted-ideas {
+    background-color: white;
+    border-radius: 15px;
+    padding: 35px;
+    margin: 25px 0;
+    box-shadow: 0 8px 24px rgba(33,150,243,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.context-section:hover, .idea-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(33,150,243,0.15);
+}
+
+h1, h2 {
+    color: var(--primary-blue);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.2em;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(33,150,243,0.2);
+    background-color: white;
+}
+
+.radio-group {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+button {
+    background: var(--gradient);
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(33,150,243,0.3);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(33,150,243,0.4);
+}
+
+.personal-info {
+    display: none;
+    animation: slideDown 0.4s ease;
+}
+
+ul {
+    list-style-position: inside;
+    margin-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+ul li::before {
+    content: "•";
+    color: var(--primary-blue);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+.idea-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(33,150,243,0.1);
+    transition: transform 0.3s ease;
+}
+
+.idea-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(33,150,243,0.2);
+}
+
+.idea-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.idea-author {
+    font-weight: 500;
+    color: var(--primary-blue);
+}
+
+.idea-date {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.idea-content {
+    color: #333;
+    line-height: 1.6;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    background: var(--gradient);
+    color: white;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .context-section,
+    .idea-form,
+    .submitted-ideas {
+        padding: 25px;
+        margin: 15px 0;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .idea-header {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="chemin/vers/votre-logo.png" alt="Logo Bureau" class="logo">
+                    <span class="logo-text">Bureau des élèves</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="tabs">
+            <button class="tab active" data-target="submit">Soumettre une idée</button>
+            <button class="tab" data-target="view">Voir les idées</button>
+        </div>
+
+        <div id="submit-section">
+            <section class="context-section">
+                <h1>Boîte à idées - Bureau des élèves</h1>
+                <h2>Contexte et objectifs</h2>
+                <p>Notre bureau est à l'écoute de vos suggestions pour améliorer la vie étudiante. Nous souhaitons recueillir vos idées innovantes pour rendre notre école encore plus dynamique et adaptée à vos besoins.</p>
+                <p>Objectifs :</p>
+                <ul>
+                    <li>Améliorer la communication entre les élèves et l'administration</li>
+                    <li>Identifier les besoins des étudiants</li>
+                    <li>Mettre en place des solutions concrètes</li>
+                </ul>
+            </section>
+
+            <section class="idea-form">
+                <h2>Proposez votre idée</h2>
+                <form id="ideaForm">
+                    <div class="form-group">
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="anonymity" value="anonymous" checked> Je souhaite rester anonyme
+                            </label>
+                            <br>
+                            <label>
+                                <input type="radio" name="anonymity" value="identified"> Je souhaite m'identifier
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="personal-info">
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" id="firstName" name="firstName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" id="lastName" name="lastName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="idea">Votre idée</label>
+                        <textarea id="idea" name="idea" rows="6" required></textarea>
+                    </div>
+
+                    <button type="submit">Soumettre mon idée</button>
+                </form>
+            </section>
+        </div>
+
+        <div id="view-section" style="display: none;">
+            <section class="submitted-ideas">
+                <h2>Idées soumises</h2>
+                <div id="ideasContainer">
+                    <!-- Les idées seront injectées ici dynamiquement -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('ideaForm');
+    const personalInfo = document.querySelector('.personal-info');
+    const radioButtons = document.querySelectorAll('input[name="anonymity"]');
+    const tabs = document.querySelectorAll('.tab');
+    const submitSection = document.getElementById('submit-section');
+    const viewSection = document.getElementById('view-section');
+    
+    // Configuration JSONBin
+    const JSONBIN_API_KEY = 'YOUR_API_KEY'; // Remplacez par votre clé API JSONBin
+    const JSONBIN_BIN_ID = 'YOUR_BIN_ID'; // Remplacez par votre BIN ID
+    const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+
+    // Gestion des onglets
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            if (tab.dataset.target === 'submit') {
+                submitSection.style.display = 'block';
+                viewSection.style.display = 'none';
+            } else {
+                submitSection.style.display = 'none';
+                viewSection.style.display = 'block';
+                loadIdeas();
+            }
+        });
+    });
+
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'identified') {
+                personalInfo.style.display = 'block';
+            } else {
+                personalInfo.style.display = 'none';
+            }
+        });
+    });
+
+    async function loadIdeas() {
+        try {
+            const response = await fetch(JSONBIN_URL, {
+                headers: {
+                    'X-Master-Key': JSONBIN_API_KEY
+                }
+            });
+            
+            if (!response.ok) throw new Error('Erreur lors du chargement des idées');
+            
+            const data = await response.json();
+            const ideas = Array.isArray(data.record) ? data.record : [data.record];
+            
+            const ideasContainer = document.getElementById('ideasContainer');
+            ideasContainer.innerHTML = ''; // Nettoyer le conteneur
+
+            ideas.forEach(idea => {
+                const ideaCard = document.createElement('div');
+                ideaCard.className = 'idea-card';
+                
+                const date = new Date(idea.timestamp).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                ideaCard.innerHTML = `
+                    <div class="idea-header">
+                        <div class="idea-author">
+                            ${idea.isAnonymous ? 'Anonyme' : `${idea.firstName} ${idea.lastName}`}
+                        </div>
+                        <div class="idea-date">${date}</div>
+                    </div>
+                    <div class="idea-content">${idea.idea}</div>
+                `;
+                
+                ideasContainer.appendChild(ideaCard);
+            });
+        } catch (error) {
+            console.error('Erreur:', error);
+            document.getElementById('ideasContainer').innerHTML = 
+                '<p style="color: red;">Une erreur est survenue lors du chargement des idées.</p>';
+        }
+    }
+
+    async function submitToJSONBin(data) {
+        try {
+            // Récupérer les données existantes
+            const getResponse = await fetch(JSONBIN_URL, {
+                headers: {
+                    'X-Master-Key': JSONBIN_API_KEY
+                }
+            });
+            
+            let existingData = await getResponse.json();
+            let ideas = Array.isArray(existingData.record) ? existingData.record : [];
+            
+            // Ajouter la nouvelle idée
+            ideas.push(data);
+            
+            // Mettre à jour le bin
+            const response = await fetch(JSONBIN_URL, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': JSONBIN_API_KEY
+                },
+                body: JSON.stringify(ideas)
+            });
+            
+            if (!response.ok) throw new Error('Erreur lors de la soumission');
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Erreur:', error);
+            throw error;
+        }
+    }
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const isAnonymous = document.querySelector('input[name="anonymity"]:checked').value === 'anonymous';
+        const idea = document.getElementById('idea').value;
+
+        if (!idea.trim()) {
+            alert('Veuillez saisir votre idée avant de soumettre.');
+            return;
+        }
+
+        let submissionData = {
+            idea: idea,
+            timestamp: new Date().toISOString(),
+            isAnonymous: isAnonymous
+        };
+
+        if (!isAnonymous) {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+
+            if (!firstName || !lastName || !email) {
+                alert('Veuillez remplir tous les champs d\'identification.');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                alert('Veuillez saisir une adresse email valide.');
+                return;
+            }
+
+            submissionData = {
+                ...submissionData,
+                firstName,
+                lastName,
+                email
+            };
+        }
+
+        try {
+            await submitToJSONBin(submissionData);
+            alert('Merci ! Votre idée a été soumise avec succès.');
+            form.reset();
+            personalInfo.style.display = 'none';
+        } catch (error) {
+            alert('Une erreur est survenue lors de la soumission. Veuillez réessayer.');
+        }
+    });
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+});
+</script>
+
+</body></html>

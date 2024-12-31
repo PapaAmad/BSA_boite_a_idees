@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boîte à idées - Bureau des statistiques de l’AES</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-container">
+          <img src="assets/img/ENSAE.jpg" alt="Logo Bureau" class="logo" />
+          <span class="logo-text">Bureau des statistiques de l’AES</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="context-section">
+      <h1>Boîte à idées - BSA</h1>
+      <h2>Contexte et objectifs</h2>
+      <p>
+        Notre bureau est à l'écoute de vos suggestions pour améliorer la vie
+        étudiante. Nous souhaitons recueillir vos idées innovantes pour rendre
+        notre école encore plus dynamique et adaptée à vos besoins.
+      </p>
+      <p>Objectifs :</p>
+      <ul>
+        <li>Améliorer la communication entre les élèves et l'administration</li>
+        <li>Identifier les besoins des étudiants</li>
+        <li>Mettre en place des solutions concrètes</li>
+      </ul>
+    </section>
+
+    <section class="idea-form">
+      <h2>Proposez votre idée</h2>
+
+      <form id="ideaForm">
+        <!-- Désactivation du captcha Formspree -->
+        <input type="hidden" name="_captcha" value="false" />
+
+        <div class="form-group">
+          <div class="radio-group">
+            <label>
+              <input
+                type="radio"
+                name="anonymity"
+                value="anonymous"
+                checked
+              />
+              Je souhaite rester anonyme
+            </label>
+            <br />
+            <label>
+              <input type="radio" name="anonymity" value="identified" />
+              Je souhaite m'identifier
+            </label>
+          </div>
+        </div>
+
+        <div class="personal-info" style="display: none;">
+          <div class="form-group">
+            <label for="firstName">Prénom</label>
+            <input type="text" id="firstName" name="firstName" />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Nom</label>
+            <input type="text" id="lastName" name="lastName" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="idea">Votre idée</label>
+          <textarea
+            id="idea"
+            name="idea"
+            rows="6"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit">Soumettre mon idée</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
+</html>
