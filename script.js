@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         formData.append('firstName', 'Anonyme');
         formData.append('lastName', 'Anonyme');
-        formData.append('email', 'Aucun');
+        // formData.append('email', 'Aucun');
       }
   
       // Envoi de la requête POST à Formspree
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
         await sendToFormspree(submissionData);
   
         // 7.3 Si tout est ok
-        alert('Merci ! Votre idée a été soumise et un email vous a été envoyé.');
+        alert('Merci ! Votre idée a été soumise avec succés.');
         form.reset();
         personalInfo.style.display = 'none';
   
